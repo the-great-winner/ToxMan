@@ -48,7 +48,7 @@ namespace ToxMan
                 app.Execute(App.Args);
              //   app.Arguments;//.Where(x => x.Name == "datadir").
             }
-                //pr
+            //pr
           
 
             try { Directory.CreateDirectory(DirData); return; }
@@ -106,8 +106,9 @@ namespace ToxMan
 
         private static ToxNode[] ProcessFoundToxNodes(string res, bool compare = true)
         {
-            var t0 = new { nodes = new List<ToxNodeFound>() };
-            var t = JsonConvert.DeserializeAnonymousType(res, t0);
+            var t0 = new List<ToxNodeFound>();
+            var tn = JsonConvert.DeserializeAnonymousType(res, t0);
+            var t = new { nodes = tn };
             if (t.nodes.Count > 0)
             {
                 if (compare)
@@ -256,6 +257,6 @@ namespace ToxMan
         public string version { set; get; }
         public bool status_tcp { set; get; }
         public bool status_udp { set; get; }
-        public List<int> tcp_ports { set; get; }
+        public int[] tcp_ports { set; get; }
     }
 }
